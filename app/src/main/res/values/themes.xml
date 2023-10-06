@@ -3,6 +3,9 @@
     <style name="Base.Theme.LitendApp" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorSecondary">@color/lightBlue</item>
+        <item name="android:statusBarColor"  >?attr/colorSecondary</item>
+        <item name="colorPrimary">@color/cardview_light_background</item>
     </style>
 
     <style name="Theme.LitendApp" parent="Base.Theme.LitendApp" />
