@@ -3,5 +3,8 @@
     <style name="Base.Theme.LitendApp" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorSecondary">@color/secondary_blue</item>
+
+        <item name="android:statusBarColor"  >?attr/colorSecondary</item>
     </style>
 </resources>
