@@ -16,13 +16,14 @@
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
     android:background="@color/white"
-    android:elevation="20dp">
+    android:elevation="20dp"
+    android:id="@+id/log_box"
+    android:paddingHorizontal="50dp">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Litend Login"
+        android:text="Login"
         android:textSize="20sp"
-        android:layout_centerHorizontal="true"
         android:id="@+id/txt_log_in"
         android:layout_marginTop="10dp"
         android:textColor="@color/button_blue"
@@ -31,7 +32,7 @@
 
     <EditText
         android:id="@+id/username"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:hint="@string/prompt_email"
@@ -44,7 +45,7 @@
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_below="@+id/username"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
@@ -57,21 +58,36 @@
         android:layout_centerHorizontal="true"
           />
 
-    <Button
-        android:id="@+id/login"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="24dp"
-        android:enabled="false"
-        android:text="SIGN IN"
         android:layout_below="@+id/password"
-        android:backgroundTint="@color/button_blue"
-        app:cornerRadius="10dp"
-        android:textColor="@color/white"
-        android:layout_centerHorizontal="true"
-        />
+        android:layout_marginTop="16dp"
+        >
+        <Button
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:text="SIGN IN"
+            android:backgroundTint="@color/button_blue"
+            app:cornerRadius="10dp"
+            android:textColor="@color/white"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="don't have account?"
+            android:layout_gravity="end"
+            android:textSize="15dp"
+            android:textColor="@color/lightBlue"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/txt_have_account"
+            />
+    </RelativeLayout>
 </RelativeLayout>
     <ProgressBar
         android:id="@+id/loading"
