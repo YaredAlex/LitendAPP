@@ -1,6 +1,8 @@
 package com.example.litendapp.ui.login
 
 import android.app.Activity
+import android.content.Intent
+import android.opengl.Visibility
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,13 +10,19 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.example.litendapp.databinding.ActivityLoginBinding
 
 import com.example.litendapp.R
+import com.example.litendapp.ui.register.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -23,48 +31,33 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityLoginBinding.inflate(layoutInflater);
         setContentView(binding.root)
-
         val username = binding.username
         val password = binding.password
-        val login = binding.login
+        val login  = binding.login
         val loading = binding.loading
-        loginViewModel = LoginViewModel();
+        val toSignin = binding.txtHaveAccount
+        var anim1 = AnimationUtils.loadAnimation(this,R.anim.from_top_to_bottom)
+        binding.logBox?.startAnimation(anim1);
+        //Model
+        loginViewModel = LoginViewModel(this@LoginActivity);
+        //Login Button
         login.setOnClickListener{
-            Toast.makeText(this@LoginActivity,"You are just doing it",Toast.LENGTH_LONG);
+            loading.visibility = View.VISIBLE
+           var result =  loginViewModel.login(username.text.toString(), password = password.text.toString()){
+               loading.visibility = View.GONE
+           }
+            Log.d("Return from login view",result.toString());
+            //loading.visibility = View.GONE
         }
-//        loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
-//            val loginState = it ?: return@Observer
+        //To Register
+        toSignin?.setOnClickListener {
+            var intent = Intent(this@LoginActivity,RegisterActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 //
-//            // disable login button unless both username / password is valid
-//            login.isEnabled = loginState.isDataValid
-//
-//            if (loginState.usernameError != null) {
-//                username.error = getString(loginState.usernameError)
-//            }
-//            if (loginState.passwordError != null) {
-//                password.error = getString(loginState.passwordError)
-//            }
-//        })
-//
-//        loginViewModel.loginResult.observe(this@LoginActivity, Observer {
-//            val loginResult = it ?: return@Observer
-//
-//            loading.visibility = View.GONE
-//            if (loginResult.error != null) {
-//                showLoginFailed(loginResult.error)
-//            }
-//            if (loginResult.success != null) {
-//                updateUiWithUser(loginResult.success)
-//            }
-//            setResult(Activity.RESULT_OK)
-//
-//            //Complete and destroy login activity once successful
-//            finish()
-//        })
-
     }
 
     private fun updateUiWithUser() {
