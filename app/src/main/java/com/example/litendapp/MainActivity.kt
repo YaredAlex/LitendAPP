@@ -14,20 +14,30 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var binding = ActivityMainBinding.inflate(layoutInflater)
-//        binding.btnMenu.setOnClickListener{
-//            Toast.makeText(this@MainActivity,"clicked in main",Toast.LENGTH_LONG).show();
-//        }
         setContentView(binding.root)
 
         var auth = Firebase.auth;
         if(auth.currentUser==null){
             var intent = Intent(this@MainActivity,LoginActivity::class.java);
             startActivity(intent);
+            finish()
         }
         else{
 
             Toast.makeText(this@MainActivity,"Logged in User",Toast.LENGTH_LONG).show()
         }
+        var logout = binding.btnLogout
+
+        logout?.setOnClickListener {
+            auth.signOut()
+            var intent = Intent(this@MainActivity,LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        var btnFirst = binding.btn1
+
+
+
 
     }
 }
