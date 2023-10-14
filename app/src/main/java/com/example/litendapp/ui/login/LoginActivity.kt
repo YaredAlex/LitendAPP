@@ -19,6 +19,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.example.litendapp.MainActivity
 import com.example.litendapp.databinding.ActivityLoginBinding
 
 import com.example.litendapp.R
@@ -45,12 +46,17 @@ class LoginActivity : AppCompatActivity() {
         //Login Button
         login.setOnClickListener{
             loading.visibility = View.VISIBLE
-           var result =  loginViewModel.login(username.text.toString(), password = password.text.toString()){
+           var result =  loginViewModel.login(username.text.toString(), password = password.text.toString(),{
                loading.visibility = View.GONE
-           }
+           },{
+               var intent = Intent(this@LoginActivity,MainActivity::class.java)
+               startActivity(intent)
+               finish()
+           })
             Log.d("Return from login view",result.toString());
-            //loading.visibility = View.GONE
+
         }
+
         //To Register
         toSignin?.setOnClickListener {
             var intent = Intent(this@LoginActivity,RegisterActivity::class.java)
