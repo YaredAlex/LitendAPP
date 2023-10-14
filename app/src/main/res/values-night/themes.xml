@@ -7,4 +7,4 @@
 
         <item name="android:statusBarColor"  >?attr/colorSecondary</item>
     </style>
-</resources>
+</resources>  

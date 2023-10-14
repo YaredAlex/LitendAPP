@@ -6,13 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Looks Like Something went Wrong!\n😒😒"
-        android:layout_centerInParent="true"
-        android:textSize="18dp"
+        android:text="LogOut"
+        android:backgroundTint="@color/secondary_blue"
+        app:cornerRadius="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/btn_logout"
         />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/lightBlue"
+            android:textSize="18dp"
+            android:text="Know Your Personality"
+            android:id="@+id/btn_1"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/purple"
+            android:layout_centerInParent="true"
+            android:textSize="18dp"
+            android:text="Check Your Knowledge"
+            android:id="@+id/btn_2"
+            android:layout_below="@+id/btn_1"
+
+            />
+    </RelativeLayout>
+
 
 
 </RelativeLayout>
