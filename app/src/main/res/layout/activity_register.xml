@@ -7,6 +7,14 @@
     tools:context=".ui.register.RegisterActivity"
     android:background="@color/secondary_blue"
     android:paddingHorizontal="10dp">
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:elevation="30dp"
+        android:id="@+id/register_progress"
+        android:visibility="gone"
+        />
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
