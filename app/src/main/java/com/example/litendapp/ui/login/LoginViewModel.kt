@@ -13,7 +13,7 @@ import com.google.firebase.ktx.Firebase
 
 class LoginViewModel(var context:Context) : ViewModel() {
 
-    fun login(username: String, password: String,closeLoading:()->Unit):Boolean {
+    fun login(username: String, password: String,closeLoading:()->Unit,startMain:()->Unit):Boolean {
         return if(!isUserNameValid(username)) {
             Toast.makeText(context, "Invalid Username", Toast.LENGTH_LONG).show()
             closeLoading()
@@ -32,8 +32,7 @@ class LoginViewModel(var context:Context) : ViewModel() {
                 addOnCompleteListener(){task->
                     if(task.isSuccessful){
                         Log.d("Login","login successful")
-                        isTrue = true
-
+                        startMain()
                     }
                     else{
                         Toast.makeText(context,task.exception?.message,Toast.LENGTH_LONG).show()
