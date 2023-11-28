@@ -1,0 +1,77 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load the CSV file containing user responses
+file_path = '/content/rand_survey.csv'  # Replace with the path to your CSV file
+data = pd.read_csv(file_path)
+
+data.head()
+
+print(data.shape)
+
+# Define the points assigned to each response
+points_dict = {
+    'SomeWhat Agree': 40,
+    'Agree': 45,
+    'Neutral': 30,
+    'Disagree': -45,
+    'SomeWhat Disagree': -40
+}
+
+# Calculate total points for each user
+data['Total_Points'] = data.apply(lambda row: sum(points_dict[response] for response in row[1:]), axis=1)
+
+data
+
+min_possible_score = sum(min(points_dict.values()) for _ in range(data.shape[1] - 1))  # Considering each question's lowest score
+max_possible_score = sum(max(points_dict.values()) for _ in range(data.shape[1] - 1))  # Considering each question's highest score
+
+print("The min value", min_possible_score)
+print("The max value", max_possible_score)
+
+# Calculate the range of possible scores
+score_range = max_possible_score - min_possible_score
+print(score_range)
+
+# Calculate the step size for dividing the range into five equal parts
+step_size = score_range / 5
+print(step_size)
+
+# Create and display the five equal ranges
+for i in range(5):
+    range_start = int(min_possible_score + (i * step_size))
+    range_end = int(min_possible_score + ((i + 1) * step_size))
+    print(f"Range {i+1}: {range_start} - {range_end}")
+
+# Define personality ranges and their labels
+personality_types = {
+    'A': (-450, -270),
+    'B': (-270, -90),
+    'C': (-90, 90),
+    'D': (90, 270),
+    'E': (270, 450)
+    # Add more personality types and their ranges as needed
+}
+
+# Function to determine personality type based on total points
+def get_personality_type(score):
+    for personality, (lower, upper) in personality_types.items():
+        if lower <= score <= upper:
+            return personality
+    return 'Unknown'
+
+# Calculate and add the personality type for each user
+data['Personality_Type'] = data['Total_Points'].apply(get_personality_type)
+
+# Display the resulting DataFrame with personality types
+print(data[['Total_Points', 'Personality_Type']])
+
+print(data.iloc[0:51])
+
+# Count the occurrences of each personality type
+personality_counts = data['Personality_Type'].value_counts()
+
+# Display the counts of each personality type
+print(personality_counts)
